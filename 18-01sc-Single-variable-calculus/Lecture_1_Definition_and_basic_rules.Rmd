@@ -1,0 +1,188 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.3.4
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
+```{python}
+from IPython.display import YouTubeVideo
+YouTubeVideo('7K1sB05pE0A')
+```
+
+# Course 18-01sc "Single variable calculus" (Fall 2010)
+
+## Unit 01 - Differentiation
+
+### This lecture answers following questions:
+
+#### What is a derivative?
+
+#### Importance of derivatives to all measurements.
+(Science, engineering, economic, political science etc.)
+
+#### How to differentiate anything?
+(any function You know)
+
+
+## geometric interpretation:
+
+Find the <a href="https://en.wikipedia.org/wiki/Tangent">tangent line</a> to $y=f(x)$ (some graph of some function) at some point $P(x_{0}, y_{0});$
+
+equation for the tangent line:
+$$
+y-y_{0}=m(x-x_{0})
+$$
+
+Two things are required:
+- point - $y_{0}=f(x_{0})$
+- slope - $m={f}'(x_{0})$ - Otherwise known as derivative of f
+
+Definition:
+
+${f}'(x_{0})$, the derivative of function (f) at $x_{0}$ is the slope of the tangent line to $y=f(x)$ at P
+
+TANGENT LINE = LIMIT OF SECANT LINES PQ AS Q -> P WHEN P IS FIXED AND Q IS VARYING
+
+(Theorethically this should work for any given point at $f(x)$?)
+
+
+### Slope
+
+<img src="https://i.imgur.com/HmMxkHs.png" title="Slope visually"/>
+
+**Slope value of PQ is:**
+
+$$
+\frac{\Delta f}{\Delta x}
+$$
+
+**Slope value of tangent is:**
+
+$$f'(x) = m = \lim_{\Delta x\to 0} \frac{\Delta f}{\Delta x}$$
+
+<img src="https://i.imgur.com/Xp7txDk.png" title="Slope of secant and tangent"/>
+
+**Simplifying the equasion:**
+
+<img src="https://i.imgur.com/vAMev6h.png" title="Simplyfying the equasion">
+
+**Unified derivative:**
+
+$$
+f`(x) = \lim_{\Delta x\to 0} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x}
+$$
+
+<img src="https://i.imgur.com/FE5f4oi.png" title="Unified derivative equasion">
+
+
+## Exercise 1
+$\require{cancel}$
+Given the function:
+
+$$
+\LARGE f(x)=\frac{1}{x}
+$$
+
+Calculate it's derivative using this equasion:
+
+$$
+\large f`(x) = \lim_{\Delta x\to 0} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x}
+$$
+
+## Solution:
+
+### Replace the data in the equasion:
+
+$$
+\large \frac{\Delta f}{\Delta x} = \frac{\frac{1}{x_{0} + \Delta x} - \frac{1}{x_{0}}}{\Delta x} =
+$$
+
+### Common denominator and different visual representation of dividing by $\Delta x$:
+
+$$
+\large = \frac{\Delta 1}{\Delta x}(\frac{x_{0} - (x_{0} + \Delta x)}{(x_{0} + \Delta x)x_{0}}) = \frac{1}{\cancel{ \Delta x}}(\frac{\cancelto{-1}{- \Delta x}}{(x_{0}+ \Delta x)x_0}) =
+$$
+
+$$
+\large = \frac{-1}{(x_{0}+ \Delta x)x_{0}} =
+$$
+
+Set the $\Delta x$ to 0 and the answer is here!
+
+$$
+\large = \frac{-1}{(x_{0}+ \Delta x)x_{0}} \lim_{\Delta x\to 0} = \frac{-1}{x^2_{0}}
+$$
+
+Final answer "derivative":
+
+$$
+\LARGE f'(x) = \frac{-1}{x^2_{0}}
+$$
+
+Checking for plausability:
+
+<img src="https://i.imgur.com/PFBA0YS.png"/>
+
+The derivative is facing downward $f'(x) = \frac{-1}{x^2_{0}} < 0$
+
+As $x \to \infty$ the tagent itself gets less steep
+
+
+## Exercise 2
+$\require{cancel}$
+
+#### Find areas of triangles enclosed by axes and tangent to 
+$$
+\large f(x)=\frac{1}{x}
+$$
+
+#### Visual representation of the exercise:
+
+<img src="https://i.imgur.com/s0kbt2l.png">
+
+#### Remember the formula from above? $y-y_{0}=m(x-x_{0})$
+
+Using the derivative: $f'(x)= m = \frac{-1}{x^2_{0}}$
+
+We will use it here to calculate the tangent line and the points y_intercept and x_intercept:
+$$
+\large y-y_{0}= \frac{-1}{x_{0}^{2}}(x-x_{0})
+$$
+
+#### Starting with $y=0$:
+
+$$
+0-y_{0} = \frac{-1}{x_{0}^{2}}(x-x_{0})
+$$
+
+#### We know that $y=\frac{1}{x}$ so we can:
+
+$$
+0-\frac{1}{x_{0}} = \frac{-1}{x_{0}^{2}}(x-x_{0})
+$$
+
+#### Simplifying the left side:
+
+$$
+\frac{1}{x_{0}} = \frac{-x}{x_{0}^{2}} + \frac{1}{x_{0}}
+$$
+
+
+## physical interpretation:
+
+$$
+\LARGE \frac{d}{dx}e^{xarctanx}=?
+$$
+
+
+```{python}
+
+```
