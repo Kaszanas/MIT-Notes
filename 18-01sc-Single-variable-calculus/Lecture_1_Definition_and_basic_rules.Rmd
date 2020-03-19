@@ -136,7 +136,7 @@ The derivative is facing downward $f'(x) = \frac{-1}{x^2_{0}} < 0$
 As $x \to \infty$ the tagent itself gets less steep
 
 
-## Exercise 2
+# Exercise 2
 $\require{cancel}$
 
 #### Find areas of triangles enclosed by axes and tangent to 
@@ -174,6 +174,87 @@ $$
 $$
 \frac{1}{x_{0}} = \frac{-x}{x_{0}^{2}} + \frac{1}{x_{0}}
 $$
+
+#### Multiplying both sides by $x_{0}$:
+
+$$
+\frac{1}{\cancelto{1}{x_{0}}} * \frac{\cancelto{1}{x_{0}}}{1} = \frac{-x}{\cancelto{x_{0}}{x_{0}^{2}}} * \frac{\cancelto{1}{x_{0}}}{1} + \frac{1}{\cancelto{1}{x_{0}}} * \frac{\cancelto{1}{x_{0}}}{1}
+$$
+
+#### Result of said multiplication:
+
+$$
+1 = \frac{-x}{x_{0}} + 1
+$$
+
+#### Switching sides:
+
+$$
+\frac{x}{x_{0}} = 2
+$$
+
+### Multiplying both sides by $x_{0}$ and the final result for x_intercept is:
+
+$$
+\LARGE x = 2x_{0}
+$$
+
+
+### Shortcut to calculate y_intercept is to use symmetry:
+
+$$
+\large (x, y) \Rightarrow (y, x)
+$$
+
+### So the final result would be:
+
+$$
+\LARGE y = 2y_{0}
+$$
+
+## Explaining symmetry:
+
+$$
+\large y = \frac{1}{x} \Leftrightarrow xy = 1 \Leftrightarrow x = \frac{1}{y}
+$$
+
+
+# Exercise 3
+
+### Calculate area of x_intercept, y_intercept and $(0, 0)$ triangle:
+
+#### Solution:
+
+$$
+\large \frac{1}{2}(2x_{0})(2y_{0}) = 2x_{0}y_{0} = 2
+$$
+
+
+# More notations:
+
+$$
+\large y = f(x)
+$$
+
+$$
+\large \Delta y = \Delta f
+$$
+
+## Derivative notations:
+
+#### Newton notation:
+
+$$
+\large f'
+$$
+
+#### Leibniz notation:
+
+$$
+\large \frac{df}{dx} = \frac{dy}{dx} = \frac{d}{dx}f = \frac{d}{dx}y
+$$
+
+Above notations omit the basepoint $x_{0}$ so it is not really clear to read.
 
 
 ## physical interpretation:
