@@ -256,14 +256,108 @@ $$
 
 Above notations omit the basepoint $x_{0}$ so it is not really clear to read.
 
+<!-- #region -->
+# Exercise 4
+
+### Calculate the derivative of function below:
+
+$$
+\large f(x) = x^{n}
+$$
+
+### Solution
+
+Notice Leibniz notation being used:
+
+$$
+\frac{d}{dx}x^{n} = ?
+$$
+
+#### Pluging in theorethical values:
+
+Notice that there is no $x_{0}$ being used here in the parentheses:
+
+$$
+\frac{\Delta{f}}{\Delta{x}} = \frac{(x+\Delta{x})^{n}-x^{n}}{\Delta{x}}
+$$
+
+
+#### Binomial Theorem
+
+To understand the n-th power of a sum $(x+\Delta{x})^{n}$ the Binomial Theorem must be used.
+
+$$
+(x+\Delta{x})^{n} = (x+\Delta{x}) \cdots (x+\Delta{x}) = x^{n}+nx^{n-1}+junk
+$$
+
+You should notice that there is something weird happening above and "junk" is mentioned. It is there to symbolize all other terms. And there is a notation for it.
+
+Notation for the junk:
+
+$$
+O((\Delta{x}^{2}))
+$$
+
+More precisely the notation above means that these are terms of order:
+
+$$
+(\Delta{x})^{2},(\Delta{x})^{3}
+$$
+
+Or higher.
+
+So overall it will look like:
+
+$$
+x^{n}+nx^{n-1}+O((\Delta{x}^{2}))
+$$
+
+#### Continuing solution
+
+$$
+\frac{\Delta{f}}{\Delta{x}} = \frac{1}{\Delta{x}}((x+\Delta{x})^{n}-x^{n}) = \frac{1}{\Delta{x}}(x^{n}+nx^{n-1}\Delta{x}+O((\Delta{x})^{2})-x^{n}) =
+$$
+
+Performing possible cancelation:
+
+$$
+= \frac{1}{\Delta{x}}(\cancel{x^{n}}+nx^{n-1}\Delta{x}+O((\Delta{x})^{2})\cancel{-x^{n}}) =
+$$
+
+Divide in by $\Delta{x}$:
+
+$$
+= nx^{n-1}+O(\Delta{x})
+$$
+
+This tends to as $\Delta{x}$ goes to 0
+
+$$
+\underset{\Delta{x}\to{0}}{\rightarrow{nx^{n-1}}}
+$$
+
+### Solved
+
+$$
+\frac{d}{dx}x^{n} = nx^{n-1}
+$$
+
+And this extends to polynomials:
+
+### Another example
+
+Using the calculated derivative above we can plug in any other example function:
+
+$$
+\frac{d}{dx}(x^{3}+5x^{10}) = 3x^{2} + 50x^{9}
+$$
+<!-- #endregion -->
 
 ## physical interpretation:
+
+Physical interpretation was shown only at the start of the lecture but was not referenced any further:
 
 $$
 \LARGE \frac{d}{dx}e^{xarctanx}=?
 $$
 
-
-```{python}
-
-```
