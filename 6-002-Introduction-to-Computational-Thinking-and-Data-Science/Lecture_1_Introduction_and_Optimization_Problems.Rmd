@@ -1,0 +1,117 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.3.4
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
+```{python}
+from IPython.display import YouTubeVideo
+YouTubeVideo('C1lhuz6pZC0')
+```
+
+Explicit link: https://www.youtube.com/watch?v=C1lhuz6pZC0
+
+
+# Course 6.0002 "Introduction and Optimization Problems" (Fall 2016)
+
+
+### Software Engineering with emphasis on using package
+
+## Main topic of the course
+
+Coputational modes - How to use computation to understand the world
+
+What is a model? 
+
+Experimental device to help people understand something that has happened - explaining phenomenon.
+
+or a model that will allow to predict the future - something that has not yet happened.
+
+Traditional experimentation must be complemented by computation.
+
+## Optimization models
+
+Starting with objective function to be maximized or minimized.
+
+e.g. minimizing travel time when looking for a route.
+
+And additional constraints on the model afterwards (budget, time constraints etc.)
+
+<!-- #region -->
+## Knapsack problem
+
+Often presented in a way: "Imagine being a burglar wanting to maximize the stolen property, but You only have a knapsack with a certain volume and can select only certain items."
+
+1. You have limited strength, so there is a maximum weight knapsack that you can carry.
+2. You would like to take more stuff than You can carry.
+3. How to choose which stuff to take and what to leave behind.
+
+### Two variants of knapsack problem
+
+1. 0/1 knapsack problem - take a whole bar of gold or take none of it
+2. Continous or fractional knapsack problem - You can take a pieces of gold bar
+
+#### Problem 2
+
+"boring" and easy to solve, just take the most valuable stuff until You run out of space or the stuff and then move to the next.
+It can be solved with a "greedy" algorithm which will be referenced later on.
+
+
+#### Problem 1
+
+is much more complicated as the decision that You perform first will influence future decisions.
+
+Formalized:
+
+1. Each item is represented by a pair ```<value, weight>```
+2. You can take only limited amount of weight - w
+3. Vector L, of length n represents the set of available items. Each element of the vector is an item.
+4. Vector V, of length n, used to indicate whether or not items are taken. If ```V[i] = 1```, item ```I[i]``` is taken. If ```V[i] = 0```, item ```I[i]``` is not taken
+
+Mathematical solution:
+
+Find a V that maximizes:
+
+$$
+\large \sum_{i=0}^{n-1}V[i]*I[i].value
+$$
+
+subject to the constraint that
+
+$$
+\large \sum_{i=0}^{n-1}V[i]*I[i].weight \leqslant w
+$$
+
+<!-- #endregion -->
+
+### Solution
+
+#### Brute force algorithm
+
+1. Enumerate all possible combinations of items. That is to say, generate all subsets of the set of items. This is called the ```power set```.
+
+2. Remove all of the combinations whose total units exceeds the allowed weight.
+
+3. From the remaining combinations chose any one whose value is largest.
+
+Translated to my language:
+
+1. Choose all of the possible combinations
+
+2. Remove all combintions exceeding the weight constraint
+
+3. Choose the most valuable combination
+
+#### This is often not practical solution
+
+```{python}
+
+```
