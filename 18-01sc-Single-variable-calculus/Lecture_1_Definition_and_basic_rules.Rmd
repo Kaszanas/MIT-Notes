@@ -17,6 +17,9 @@ from IPython.display import YouTubeVideo
 YouTubeVideo('7K1sB05pE0A')
 ```
 
+Explicit link: https://www.youtube.com/watch?v=7K1sB05pE0A
+
+
 # Course 18-01sc "Single variable calculus" (Fall 2010)
 
 ## Unit 01 - Differentiation
