@@ -112,6 +112,10 @@ Translated to my language:
 
 #### This is often not practical solution
 
+### Sad truth
+
+Most optimization problems are so called "exponential problems".
+
 ```{python}
 
 ```
