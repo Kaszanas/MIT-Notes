@@ -1,0 +1,317 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.3.4
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
+```{python}
+from IPython.display import YouTubeVideo
+YouTubeVideo('C1lhuz6pZC0')
+```
+
+Explicit link: https://www.youtube.com/watch?v=C1lhuz6pZC0
+
+
+# Course 6.0002 "Introduction and Optimization Problems" (Fall 2016)
+
+
+### Software Engineering with emphasis on using package
+
+## Main topic of the course
+
+Coputational modes - How to use computation to understand the world
+
+What is a model? 
+
+Experimental device to help people understand something that has happened - explaining phenomenon.
+
+or a model that will allow to predict the future - something that has not yet happened.
+
+Traditional experimentation must be complemented by computation.
+
+## Optimization models
+
+Starting with objective function to be maximized or minimized.
+
+e.g. minimizing travel time when looking for a route.
+
+And additional constraints on the model afterwards (budget, time constraints etc.)
+
+<!-- #region -->
+## Knapsack problem
+
+Often presented in a way: "Imagine being a burglar wanting to maximize the stolen property, but You only have a knapsack with a certain volume and can select only certain items."
+
+1. You have limited strength, so there is a maximum weight knapsack that you can carry.
+2. You would like to take more stuff than You can carry.
+3. How to choose which stuff to take and what to leave behind.
+
+### Two variants of knapsack problem
+
+1. 0/1 knapsack problem - take a whole bar of gold or take none of it
+2. Continous or fractional knapsack problem - You can take a pieces of gold bar
+
+#### Problem 2
+
+"boring" and easy to solve, just take the most valuable stuff until You run out of space or the stuff and then move to the next.
+It can be solved with a "greedy" algorithm which will be referenced later on.
+
+
+#### Problem 1
+
+is much more complicated as the decision that You perform first will influence future decisions.
+
+Formalized:
+
+1. Each item is represented by a pair ```<value, weight>```
+2. You can take only limited amount of weight - w
+3. Vector L, of length n represents the set of available items. Each element of the vector is an item.
+4. Vector V, of length n, used to indicate whether or not items are taken. If ```V[i] = 1```, item ```I[i]``` is taken. If ```V[i] = 0```, item ```I[i]``` is not taken
+
+Mathematical solution:
+
+Find a V that maximizes:
+
+$$
+\large \sum_{i=0}^{n-1}V[i]*I[i].value
+$$
+
+subject to the constraint that
+
+$$
+\large \sum_{i=0}^{n-1}V[i]*I[i].weight \leqslant w
+$$
+
+<!-- #endregion -->
+
+### Solution
+
+#### Brute force algorithm
+
+1. Enumerate all possible combinations of items. That is to say, generate all subsets of the set of items. This is called the ```power set```.
+
+2. Remove all of the combinations whose total units exceeds the allowed weight.
+
+3. From the remaining combinations chose any one whose value is largest.
+
+Translated to my language:
+
+1. Choose all of the possible combinations
+
+2. Remove all combintions exceeding the weight constraint
+
+3. Choose the most valuable combination
+
+#### This is often not practical solution
+
+### Sad truth
+
+Man optimization problems are inherently "exponential problems". And worst case running time is exponential.
+
+### How to optimize
+
+Greedy algorithm pseudocode:
+
+```python
+while knapsack not full:
+    put "best" available item into knapsack
+```
+
+What does it mean that the item is ```python "best"```?
+1. Most valuable?
+2. Least calories?
+3. Highes ratio of value to units?
+
+### Subjective value
+
+Choosing a meal is a knapsack problem:
+
+
+|   Food   | wine | beer | pizza | burger | fries | coke | apple | donut |
+|:--------:|------|------|-------|--------|-------|------|-------|-------|
+| Value    | 89   | 90   | 30    | 50     | 90    | 79   | 90    | 10    |
+| Calories | 123  | 154  | 258   | 354    | 365   | 150  | 95    | 195   |
+
+<!-- #region -->
+Let's build a program to find optimal menu!
+
+Please note that the code written below is formatted differently in the video.
+I have decided to use PEP8 standard for the styling
+
+
+#### Data structure that will be used
+```python
+
+class Food(object):
+    
+    def __init__(self, n, v, w):
+        self.name = n
+        self.value = v
+        self.calories = w
+    
+    def get_value(self):
+        return self.value
+    
+    def get_cost(self):
+        return self.calories
+    
+    def density(self):
+        return self.get_value()/self.get_cost()
+    
+    def __str__(self):
+        return f'{self.name}: <{self.value},{self.calories}>'
+        
+```
+<!-- #endregion -->
+
+<!-- #region -->
+#### Function which will build our menu
+
+My implementation differs slightly from one that is shown in the lecture. It is achieved by using:
+
+```python
+enumerate(list)
+```
+
+instead of:
+```python
+range(len(list))
+```
+
+which in this case was used only to find the current index of a list.
+
+My implementation:
+```python
+from typing import List
+
+
+def build_menu(names:List[str], values:List, calories:List) -> List:
+    """
+    names, values, calories - lists of same length
+    names - list of strings 
+    values - list of subjective or objective value
+    calories - cost
+    returns list of foods.
+    """
+    menu = []
+    
+    for i, v in enumerate(values):
+        menu.append(Food(names[i], values[i], calories[i]))
+        return menu
+```
+
+#### Implementation of Flexible Greedy
+
+```python
+
+def greedy(items, max_cost, key_function):
+    """
+    Assumes items a list, max_cost >= 0,
+    key_function maps elements of items to numbers
+    """
+    items_copy = sorted(items, key = key_function, reverse = True)
+    result = []
+    
+    total_value, total_cost = 0.0, 0.0
+    
+    for i in enumerate(items_copy):
+        if (total_cost + items_copy[i].get_cost()) <= max_cost:
+            result.append(items_copy[i])
+            total_cost += items_copy[i].get_cost()
+            total_value += items_copy[i].get_value()
+            
+            
+    return (result, total_value)
+```
+
+
+```key_function``` will be used to sort the items from best to worst. and its responsibility will be to specify what is meant by "best" to optimize for it.
+
+#### Algorithm explanation
+
+In my own words:
+
+This algorithm puts items into the knapsack until there is no more space and then looks for the next item that has the best value and still fits in the knapsack.
+
+#### What is the efficiency of the algorithm above?
+
+First step:
+
+```python
+items_copy = sorted(items, key = key_function, reverse = True)
+```
+
+Python uses [Timsort](https://en.wikipedia.org/wiki/Timsort "Wikipedia - Timsort") which is a variant of Quicksort.
+
+Worst case complexity:
+
+$$
+\large nlog_{n}
+$$
+
+```n = len(items))```
+
+This means that the above algorithm is of order:
+
+$$
+\large O(nlog_{n})
+$$
+<!-- #endregion -->
+
+### Using the algorithm
+
+```python
+def test_greedy(items, constraint, key_function):
+    taken, val = greedy(items, constraint, key_function)
+    print('Total value of items taken =', val)
+    for item in taken:
+        print('  ', item)
+```
+
+Testing greedy on max units:
+
+```python
+def test_greedys(foods, max_units):
+    print('Use greedy by value to allocate', max_units, 'calories')
+    
+    test_greedy(foods, max_units, Food.get_value)
+    print('\nUse greedy by cost to allocate', max_units, 'calories')
+    
+    test_greedy(foods, max_units, lambda x: 1/Food.get_cost(x))
+    print('\nUse greedy by density to allocate', max_units, 'calories')
+    
+    test_greedy(foods, max_units, Food.density)
+```
+
+Run the code defined above by using the code below:
+
+```python
+
+names = ['wine', 'beer', 'pizza', 'burger', 'fries', 'cola', 'apple', 'donut']
+values = [89, 90, 95, 100, 90, 79, 50]
+calories = [123, 154, 258, 354, 365, 150, 95, 195]
+
+foods = build_menu(names, values, calories)
+test_greedys(foods, 750)
+```
+
+
+### Problem with greedy algorithms
+
+You can get stuck at a local maximum instead of global maximum.
+
+Local optimal point is not always the best optimal point.
+
+Next Lecutre will explain how to guarantee optimal solution.
+
+```{python}
+
+```
