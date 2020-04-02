@@ -20,10 +20,12 @@ YouTubeVideo('C1lhuz6pZC0')
 Explicit link: https://www.youtube.com/watch?v=C1lhuz6pZC0
 
 
-# Course 6.0002 "Introduction and Optimization Problems" (Fall 2016)
+# Course 6.0002 "Introduction to Computational Thinking and Data Science" (Fall 2016)
+
+## Lecture 1 - Introduction and Optimization Problems
 
 
-### Software Engineering with emphasis on using package
+### Software Engineering with emphasis on using packages
 
 ## Main topic of the course
 

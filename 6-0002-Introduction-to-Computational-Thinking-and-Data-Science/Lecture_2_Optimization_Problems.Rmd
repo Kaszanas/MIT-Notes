@@ -7,9 +7,9 @@ jupyter:
       format_version: '1.2'
       jupytext_version: 1.3.4
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3.7.3 64-bit
     language: python
-    name: python3
+    name: python37364bitedaabc8dd96e4c4aac034eac41f2acb0
 ---
 
 ```{python}
@@ -18,6 +18,111 @@ YouTubeVideo('uK5yvoXnkSk')
 ```
 
 Explicit link: https://www.youtube.com/watch?v=uK5yvoXnkSk
+
+
+# Course 6.0002 "Introduction to Computational Thinking and Data Science" (Fall 2016)
+
+## Lecture 2 - "Optimization problems"
+
+<!-- #region -->
+### Pros and cons of greedy algorithms
+
+Pros:
+- Easy to implement
+- Computationally efficient
+
+
+Cons:
+- Does not always yield the best solution
+- We don't know how good the approximation is 
+<!-- #endregion -->
+
+## Algorithm that finds the best solution
+
+1. Enumerate all possible combinations of items
+2. Remove all of the combinations whose total units exceeds the allowed weight
+3. From the remaining combinations choose any one whose value is the largest
+
+There are lots of different ways to implement it.
+
+### Search Tree
+
+Draw a root node, right path means we didn't take and the consequence of such action, left means we took the items and the consequence of such action.
+
+Apply recursively and check which choice fits the constraints:
+
+- Left-first, depth-first enumeration with backtracking.
+
+Left leaf of the tree will have all of the possible items inside of it.
+Right leaf of the tree will have none of the items inside of it.
+
+- Check which leaf fits the constraint.
+
+#### Computational complexity
+
+Time is based on the number of nodes generated (if You know the number of nodes You know asymptotic complexity of the algorithm).
+
+- Number of levels is number of items to choose from
+- Number of nodes at level $i$ is $2^{i}$
+
+If there are $n$ items the number of nodes is:
+
+$$
+\large \sum_{i=0}^{i=n}2^{i}
+$$
+
+So the complexity of the algorithm is:
+
+$$
+\large O(2^{n+1})
+$$
+
+#### Obvious optimization
+
+Don't explore the parts of the tree that violate constraints (e.g. too many calories)
+
+- Please note that this does not change complexity
+
+
+## Algorithm implementation
+
+- Please note that the code presented below is formatted differently than the one that was included in the talk as I am used to PEP8
+
+```python
+
+from typing import List
+
+def max_value(to_consider: List, avail):
+   """
+   Assumes to_consider a list of items, avail a weight.
+   Returns a tuple of total value of a solution to 0/1 knapsack problem and the items of that solution.
+   """
+
+    if to_consider == [] or avail == 0:
+        result = (0, ())
+    elif to_consider[0].get_cost() > avail:
+        # Explore right branch only
+        result = max_val(to_consider[1:], avail)
+    else:
+        next_item = to_consider[0]
+        
+        # Explore left branch
+        with_val, with_to_take = max_val(to_consider[1:], avail - next_item.get_cost())
+        with_val += next_item.get_value()
+        
+        # Explore right branch
+        
+        # I can't read this part of the code from the screen on the presentation:
+        without_val, without_to_take = max_val(to_consider[1:], avail)
+
+        if with_val > without_val:
+            result = (with_val, with_to_take + (next_item,))
+        else:
+            result = (without_val, without_to_take)
+
+```
+
+Stopped at 14:01 in the video (Will have to take notes of the things that are more insightful than the comments in the code so that it might be usfeul later.
 
 ```{python}
 
